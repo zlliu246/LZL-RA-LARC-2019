@@ -7,7 +7,7 @@ from flask import request, logging
 from flask_restplus import Resource, Api, Namespace, reqparse
 from flask_cors import CORS, cross_origin
 
-from scrape.main import *
+from scrape import scrape_main 
 
 app = flask.Flask(__name__)
 api = Api(app)
@@ -31,7 +31,11 @@ class SearchAPI(Resource):
         args = query_args.parse_args()
         query = args["query"]
         num_results = args["num_results"]
-        return search_google(query, num_results=num_results)
+
+        """
+        from scrape/scrape_main.py
+        """
+        return scrape_main.search_google(query, num_results=num_results)
 
 @app.after_request
 def apply_headers(response):
@@ -40,4 +44,4 @@ def apply_headers(response):
     return response
 
 if __name__ == '__main__':  
-   app.run(debug=True)
+   app.run(debug=True, port="5002")
