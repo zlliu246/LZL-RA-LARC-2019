@@ -28,7 +28,7 @@ input: sentence
 output: processed list of words
 """
 def clean(string):
-    string = string.lower()
+    string = str(string).lower()
     list_words = remove_stopwords(tokenize(remove_punctuation(string)))
     return " ".join([lem.lemmatize(i) for i in list_words])
 
