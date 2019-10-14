@@ -1,3 +1,5 @@
+# do this on desktop-LZL - contains large datasets non-pushable to git
+
 import pandas as pd
 from random import sample, shuffle
 
