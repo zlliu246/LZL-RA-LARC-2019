@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 vec = TfidfVectorizer()
 
 def get_tts_xy(filepath):
-    data = pd.read_csv(filepath)
+    data = pd.read_csv(filepath, encoding = "ISO-8859-1")
 
     x = data.iloc[:,0].values
     y = data.iloc[:,1]

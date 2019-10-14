@@ -1,9 +1,9 @@
 # do this on desktop-LZL - contains large datasets non-pushable to git
-
+import os
 import pandas as pd
 from random import sample, shuffle
 
-num = 10000
+num = 30000
 
 output = []
 pos, neg = [], []
@@ -21,7 +21,8 @@ output.extend([(i,0) for i in sample(neg,num)])
 
 shuffle(output)
 
-with open("main.csv","w") as f:
+with open(f"training_data/train{len(os.listdir('training_data'))+1}.csv","w") as f:
+    f.write("questions,relationship_related\n")
     for i,j in output:
         i = i.replace(",","")
         f.write(f"{i},{j}\n")

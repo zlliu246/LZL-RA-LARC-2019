@@ -4,7 +4,7 @@ from preprocess import *
 
 cp("importing modules")
 
-x_train, x_test, y_train, y_test = get_tts_xy("train1.csv"); cp("preprocessing")
+x_train, x_test, y_train, y_test = get_tts_xy("training_data/train2.csv"); cp("preprocessing")
 
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.metrics import accuracy_score as acc
