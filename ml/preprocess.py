@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 vec = TfidfVectorizer()
 
-def get_tts_xy(filepath):
+def get_vectorized_tts_xy(filepath):
     data = pd.read_csv(filepath, encoding = "ISO-8859-1")
 
     x = data.iloc[:,0].values
@@ -25,3 +25,8 @@ def get_tts_xy(filepath):
     x_test = vec.transform(x_test)
 
     return x_train, x_test, y_train, y_test
+
+def get_vectorized_test_x(lis, vec):
+    for i,val in e(lis):
+        lis[i] = clean(val)
+    return vec.transform(lis)
