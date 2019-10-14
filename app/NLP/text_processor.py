@@ -1,6 +1,6 @@
 # processes and cleans text, used by scrape/main.py
 
-from NLP.helper import *
+from app.NLP.helper import *
 e = enumerate
 
 """

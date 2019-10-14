@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from googlesearch import search
 
 from time import sleep, time
-from NLP.text_processor import process
+from app.NLP.text_processor import process
 
 """
 input:  given url

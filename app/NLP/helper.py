@@ -11,7 +11,7 @@ stopwords = set(stopwords.words("english"))
 
 # set of all english words (dk if exhaustive) read from words_alpha.txt (from github)
 english_words = set()
-with open("words_alpha.txt") as f:
+with open("app/words_alpha.txt") as f:
     for line in f:
         english_words.add(line.strip().lower())
 
