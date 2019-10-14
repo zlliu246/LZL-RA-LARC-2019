@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from random import sample, shuffle
 
-num = 30000
+num = 600000
 
 output = []
 pos, neg = [], []
