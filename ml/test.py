@@ -11,7 +11,7 @@ test = pd.read_csv("test.csv")
 
 x_test, y_test = test.iloc[:,0].values, test.iloc[:,1].values
 
-vec, model = load("LogisticRegression_6"); cp("pickle loading")
+vec, model = load("LogisticRegression_7"); cp("pickle loading")
 
 x_test = get_vectorized_test_x(x_test, vec)
 y_pred = model.predict(x_test)
@@ -22,7 +22,18 @@ pre = precision_score(y_pred, y_test)
 rec = recall_score(y_pred, y_test)
 
 # option to show wrong entries only
-SHOW_WRONG_ONLY = 1
+SHOW_WRONG_ONLY = False
+
+try:
+    arg = sys.argv[1]
+    """
+        arg = "--wrong-only" --> 
+    """
+
+    if arg.strip() == "--wrong-only":
+        SHOW_WRONG_ONLY = True
+except:
+    pass
 
 if SHOW_WRONG_ONLY:
     a,b,c = [],[],[]
