@@ -2,8 +2,8 @@
 repo for research assistant role for LARC sep-nov 2019
 
 # Query part
-1) pip install flask flask_restplus flask_cors bs4 requests google nltk
-32) py app.py
+1) pip install flask flask_cors bs4 requests google nltk
+2) py app.py
 
     * Serving Flask app "app" (lazy loading)
     * Environment: production
@@ -18,8 +18,6 @@ repo for research assistant role for LARC sep-nov 2019
     should appear
 
 3) go to chrome and type "localhost:5000"
-4) a Swagger UI should appear 
-5) enter 1) query and 2) number of results and a json should be returned
 
 
 # ML: classifying if query is relationship-related or not

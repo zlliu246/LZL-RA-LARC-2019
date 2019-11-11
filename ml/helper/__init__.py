@@ -52,7 +52,4 @@ def dump(thing, filename):
     mkdir()
     pickle.dump(thing, open(f"saved/{filename}.sav","wb"))
 
-DATA = "/projects/datasets/"
-DATA2 = "E:/datasets/"
-cp("start")
 

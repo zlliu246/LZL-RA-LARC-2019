@@ -37,6 +37,9 @@ output:
 def search_google(query, num_results=5):
     a = time()
     output = []
+
+    query = "".join([ch for ch in query.lower() if ch in "abcdefghijklmnopqrstuvwxyz '"])
+
     for url in search(query, stop=num_results*2, pause=0, only_standard=True):
         """
         process from NLP/text_processor.py used here
@@ -51,15 +54,3 @@ def search_google(query, num_results=5):
             break
 
     return sorted(output, key=lambda x:x["score"], reverse=True)
-
-# def search_google(query, num_results=5):
-#     # returns full url for testing purposes
-#     a = time()
-#     output = []
-#     for url in search(query, stop=num_results, pause=0, only_standard=True):
-#         response = scrape(url)
-#         output.append(response)
-#     return output
-
-
-
