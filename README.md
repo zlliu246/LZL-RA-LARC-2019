@@ -1,45 +1,97 @@
 # LZL-RA-LARC-2019
-repo for research assistant role for LARC sep-nov 2019
+repo for research assistantship for LARC Sep-Nov 2019
 
-# Query part
-1) pip install flask flask_cors bs4 requests google nltk
-2) py app.py
+## Setting up the application
+```
+pip install -r requirements.txt
+py app.py
+```
+- 3) go to chrome and type "localhost:5000"
 
-    * Serving Flask app "app" (lazy loading)
-    * Environment: production
-    WARNING: Do not use the development server in a production environment.
-    Use a production WSGI server instead.
-    * Debug mode: on
-    * Restarting with stat
-    * Debugger is active!
-    * Debugger PIN: 162-640-274
-    * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+## Query Api
+- endpoint: /api/query
+- parameters:
+    - query (question to be asked)
+    - num_results (number of results to return - default=3)
 
-    should appear
+- sample input:
+```
+localhost:5000/api/query?query=test question here&num_results=5
+```
 
-3) go to chrome and type "localhost:5000"
+- sample output:
+```
+{
+  "query": "testing question", 
+  "results": [
+    {
+      "response": "sample response 1", 
+      "score": 2.738019, 
+      "time taken": 5.390608310699463, 
+      "url": "https://random-url.com/"
+    }, 
+    {
+      "response": "sample response 2", 
+      "score": 1.9605274661184546, 
+      "time taken": 2.8204832077026367, 
+      "url": "https://random-url2.com"
+    }, 
+    {
+      "response": "sample response 3", 
+      "score": 1.8652154963606848, 
+      "time taken": 4.174862861633301, 
+      "url": "https://random-url3.com"
+    }
+  ]
+}
+```
 
+## Text classification Api: identifying if query is relationship-related or not
 
-# ML: classifying if query is relationship-related or not
+- endpoint: /api/classify
+- parameters:
+    - query (question to be classified)
 
-training_data contains a bunch of training datasets (max size 120000 lines)
-    - each containing half relationship-related, half non-related questions
-    - related questions are labelled 1, while non-realted ones are labelled 0
+- sample input:
+```
+localhost:5000/api/classify?query=random question
+```
 
+- sample output:
+```
+{
+  "query": "random question", 
+  "relationship-related": "no"
+}
+```
 
-TO TEST DATA:
+## Understanding the machine learning portion - ml folder
 
-    *** cd into ml folder on command line ***
+### training_data directory
+- this directory contains 7 .csv files used for training the models
+- each row contains {question}{1 or 0: 1 if it is relationship-related else 0}
+- they are randomly selected from the master dataset of 2 million questions
+- each dataset has equal numbers of relationship-related and non-relationship-related questions
+- the dataset size increases progressively from 1 (20k rows) to 7 (1.2 million rows)
 
-    you will use 1) test.py and 2) test.csv 3) saved folder
+### saved directory
+- this directory contains many .sav files
+- they are ready-trained and saved models that can be reused, as well as the corresponding vectorizers
+```
+import pickle
 
-    test.csv:
-        - write your own questions and label it as relationship related or not (0 or 1)
+vectorizer, model = pickle.load(open("saved/filename.sav","rb))
+```
+- each .sav file has a model class name and a number 
+- eg. BernoulliNB_3 means that a sklearn BernoulliNB model was trained on training_data/train3.csv
 
-    test.py
-        pickle loads a trained model + tfidf Vectorizer from sklearn
-        uses pre-trained model to predict your inputs
-
-        run test.py (py test.py in the ml directory) and a table will be shown
-
+## Testing ml models
+- cd into the ml folder on command line
+- edit the test.csv folder
+- set your own questions in the following format: {question};{0 or 1}
+- edit test.py and set your desired model name to "MODEL_NAME" 
+- run:
+```
+py test.py
+```
 

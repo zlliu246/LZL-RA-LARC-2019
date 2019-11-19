@@ -101,8 +101,14 @@ def process(query, text="", size=30):
     output = " ".join(output)
 
     """selecting start of first bucket to end of last bucket"""
-    start = output.index(".")
-    end = output.rindex(".")
+    start = 0
+    end = len(output)-1
+
+    try: start = output.index(".")
+    except: pass
+
+    try: end = output.rindex(".")
+    except: pass
 
     answer = output[start+1:end+1].strip()
 

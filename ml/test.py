@@ -7,15 +7,19 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 
 cp("importing modules")
 
-test = pd.read_csv("test.csv")
+MODEL_NAME = "LogisticRegression_7"
+TEST_FILENAME = "test.csv"
+DELIMITER = ","
+
+test = pd.read_csv(TEST_FILENAME, delimiter=DELIMITER)
 
 x_test, y_test = test.iloc[:,0].values, test.iloc[:,1].values
 
-vec, model = load("LogisticRegression_7"); cp("pickle loading")
+vec, model = load(MODEL_NAME); cp("pickle loading")
 
 x_test = get_vectorized_test_x(x_test, vec)
 y_pred = model.predict(x_test)
-questions = pd.read_csv("test.csv").iloc[:,0].values
+questions = pd.read_csv(TEST_FILENAME, delimiter=DELIMITER).iloc[:,0].values
 
 acc = accuracy_score(y_pred, y_test)
 pre = precision_score(y_pred, y_test)
@@ -60,4 +64,3 @@ print("*** Accuracy score:", acc, "***")
 print("*** Precision score:", pre, "***")
 print("*** Recall score:", rec, "***\n")
 print("="*160)
-

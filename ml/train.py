@@ -6,20 +6,18 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 
 """ the following algoithms takes an inhibitively long time to train with poor results comparatively """
+"""
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.neural_network import MLPClassifier
-
-
-
-
+"""
 
 from sklearn.metrics import accuracy_score as acc
 
-Model = MLPClassifier
+Model = LogisticRegression
 
 cp("importing modules")
 

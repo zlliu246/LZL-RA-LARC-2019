@@ -4,3 +4,5 @@ ml/raw/*
 *.pyc
 .google-cookie
 .dist
+.env
+env/*
