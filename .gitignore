@@ -3,3 +3,4 @@ ml/raw/*
 */__pycache__/*
 *.pyc
 .google-cookie
+.dist

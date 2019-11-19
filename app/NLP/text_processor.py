@@ -11,7 +11,7 @@ input:
     - size      - window size of pool of words
 output: hopefully legitimate answer to query
 """
-def process(query, text="", size=25):
+def process(query, text="", size=30):
     """
         removing punctuation from query
     """
@@ -26,6 +26,7 @@ def process(query, text="", size=25):
     cleans text (using NLP/helper.py) and splits text by space
     text is now a list of words
     """
+    text = (text.encode("ascii", "ignore")).decode("utf-8")
     text = [w for w in clean(text).split(" ") if len(w)>0]# and w in english_words]
     
     """
@@ -89,9 +90,20 @@ def process(query, text="", size=25):
     for i in range(start, end+1):
         output.extend(text[i])
 
+
+
+    """
+        multiply score by percentage of english words
+    """
+
+    english_word_score = len([word for word in output if word in english_words])/len(output)
+
     output = " ".join(output)
 
+    """selecting start of first bucket to end of last bucket"""
     start = output.index(".")
     end = output.rindex(".")
 
-    return output[start+1:end].strip(), best_score
+    answer = output[start+1:end+1].strip()
+
+    return answer, best_score*english_word_score**3

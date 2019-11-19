@@ -34,11 +34,14 @@ output:
         url:        original url
     }
 """
-def search_google(query, num_results=5):
+def search_google(query, num_results=3):
     a = time()
     output = []
 
+    original_query = query
     query = "".join([ch for ch in query.lower() if ch in "abcdefghijklmnopqrstuvwxyz '"])
+
+    query = "relationship " + query
 
     for url in search(query, stop=num_results*2, pause=0, only_standard=True):
         """
@@ -50,7 +53,6 @@ def search_google(query, num_results=5):
         if len(response)>0:
             output.append(answer)
 
-        if len(output) >= num_results:
-            break
+    output = sorted(output, key=lambda x:x["score"], reverse=True)
 
-    return sorted(output, key=lambda x:x["score"], reverse=True)
+    return {"query": original_query,"results":output[:num_results]}

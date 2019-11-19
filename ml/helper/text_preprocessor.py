@@ -10,7 +10,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 
-stopwords = set(stopwords.words("english"))
+stopwords = set(stopwords.words("english")) - set(["him","her","his","hers","he","she","himself","herself"])
 tokenizer = RegexpTokenizer(r"\w+")
 lem = WordNetLemmatizer()
 
@@ -31,4 +31,3 @@ def clean(string):
     string = str(string).lower()
     list_words = remove_stopwords(tokenize(remove_punctuation(string)))
     return " ".join([lem.lemmatize(i) for i in list_words])
-
