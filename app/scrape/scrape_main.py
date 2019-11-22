@@ -43,7 +43,8 @@ def search_google(query, num_results=3):
 
     query = "relationship " + query
 
-    for url in search(query, stop=num_results*2, pause=0, only_standard=True):
+    for url in search(query, stop=num_results*2):
+
         """
         process from NLP/text_processor.py used here
         """
@@ -55,4 +56,4 @@ def search_google(query, num_results=3):
 
     output = sorted(output, key=lambda x:x["score"], reverse=True)
 
-    return {"query": original_query,"results":output[:num_results]}
+    return {"query": original_query,"results": output[:num_results]}
